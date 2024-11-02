@@ -12,7 +12,7 @@ EMPTY = 0
 
 class Snake:
 
-  def __init__(self, board_size: int = 10):
+  def __init__(self, board_size: int = 20):
     self.board_size = board_size
     self.board = np.zeros((board_size, board_size), dtype=int)
     self.body = []

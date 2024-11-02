@@ -7,7 +7,7 @@ HEIGHT = 600
 
 class PySnake(Game):
 
-  def __init__(self, board_size: int = 50, game_speed: int = 5):
+  def __init__(self, board_size: int = 20, game_speed: int = 5):
     super().__init__()
     self.board_size = board_size
     self.snake = Snake(board_size)
