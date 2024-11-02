@@ -7,23 +7,35 @@ HEIGHT = 600
 
 class PySnake(Game):
 
-  def __init__(self, board_size: int = 20, game_speed: int = 10):
+  def __init__(self, board_size: int = 50, game_speed: int = 5):
     super().__init__()
     self.board_size = board_size
     self.snake = Snake(board_size)
 
     self.title = 'Snake'
-    self.fps = game_speed
+    self.fps = 60
+    self.game_speed = game_speed
     self.size = (WIDTH, HEIGHT)
     self.font = pg.font.SysFont("arial", 25)
+
+    self.frame_counter = 0
+    self.slowed = False
 
   def setup(self):
     self.snake.reset()
 
   def loop(self):
-    self.snake.move()
+    self.frame_counter += 1
+    if self.frame_counter >= self.game_speed:
+      self.snake.move()
+      self.frame_counter = 0
 
   def onEvent(self, event):
+    if event.type == pg.KEYDOWN:
+      if event.key == pg.K_SPACE:
+        if not self.slowed:
+          self.game_speed *= 2
+          self.slowed = True
     if event.type == pg.KEYUP:
       if event.key == pg.K_UP:
         if self.snake.body[0][2] != DOWN:
@@ -37,6 +49,10 @@ class PySnake(Game):
       elif event.key == pg.K_RIGHT:
         if self.snake.body[0][2] != LEFT:
           self.snake.head_dir = RIGHT
+      elif event.key == pg.K_SPACE:
+        if self.slowed:
+          self.game_speed /= 2
+          self.slowed = False
 
   def onRender(self):
     self.draw_bg()
