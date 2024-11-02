@@ -27,8 +27,10 @@ class PySnake(Game):
   def loop(self):
     self.frame_counter += 1
     if self.frame_counter >= self.game_speed:
-      self.snake.move()
       self.frame_counter = 0
+      self.snake.move()
+      if self.snake.game_over:
+        self.snake.reset()
 
   def onEvent(self, event):
     if event.type == pg.KEYDOWN:

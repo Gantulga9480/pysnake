@@ -95,11 +95,8 @@ class Snake:
       self.body[i][2] = last_dir
       last_dir = tmp_dir
       self.move_block(block, i)
-    if self.game_over:
-      self.reset()
-    else:
-      self.food_check()
-    return self.game_over
+    self.food_check()
+    return not self.game_over
 
   def move_block(self, block, idx):
     x = block[0]
