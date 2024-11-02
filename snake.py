@@ -62,8 +62,8 @@ class Snake:
           break
     else:
       empty_nodes = []
-      for y in self.board_size:
-        for x in self.board_size:
+      for y in range(self.board_size):
+        for x in range(self.board_size):
           if self.board[y][x] == EMPTY:
             empty_nodes.append([x, y])
       self.food_position = empty_nodes[np.random.choice(len(empty_nodes))]
