@@ -26,7 +26,10 @@ class Snake:
     for y in range(self.board_size):
         row = []
         for x in range(self.board_size):
-            row.append(str(self.board[y][x]))
+            if self.board[y][x] in [HEAD, TAIL]:
+              row.append('@')
+            else:
+              row.append(str(self.board[y][x]))
         rep_str.append(' '.join(row))
     return '\n'.join(rep_str)
 
